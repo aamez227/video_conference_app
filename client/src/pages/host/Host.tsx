@@ -37,14 +37,16 @@ const Host = ({ sessionId }: any) => {
     }, []);
 
     useEffect(() => {
-        socket.on("participant-join-room", (name) => {
-            toastNotification(`Participant ${name} joined the conference`, 'info');
-        });
-
-        return () => {
-            socket.off("participant-join-room");
-        };
-    }, []);
+        if(timerDuration < 0) {
+            socket.on("participant-join-room", (name) => {
+                toastNotification(`Participant ${name} joined the conference`, 'info');
+            });
+    
+            return () => {
+                socket.off("participant-join-room");
+            };
+        }
+    }, [timerDuration]);
 
     let gridSize: number;
     switch (session?.data.participants.length) {
