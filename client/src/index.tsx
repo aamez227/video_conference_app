@@ -1,16 +1,25 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import App from './App';
+import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider } from '@mui/material/styles';
+import theme from './theme';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import reportWebVitals from './reportWebVitals';
+import { AuthContextProvider } from './context/authContext';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <ThemeProvider theme={theme}>
+    <CssBaseline />
+    <AuthContextProvider>
+      <App />
+    </AuthContextProvider>
+    <ToastContainer />
+  </ThemeProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
